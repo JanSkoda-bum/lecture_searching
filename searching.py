@@ -32,13 +32,33 @@ def linear_search(list_of_numbers, number):
 
     return {"positions": list_of_indxs, "count": len(list_of_indxs)}
 
+def pattern_search(sequence, pattern):
+    set_of_idxs = set()
+    pattern_length = len(pattern)
+    for idx in range(0, len(sequence) - pattern_length + 1):
+        pattern_similarity = 0
+        for idx_pattern, pattern_element in enumerate(pattern):
+            if sequence[idx + idx_pattern] == pattern_element:
+                pattern_similarity = pattern_similarity + 1
+            else:
+                pass
+
+        if pattern_similarity == pattern_length:
+            set_of_idxs.add(idx + pattern_length // 2 - 1)
+        else:
+            pass
+    return set_of_idxs
+
+
 def main():
     json_filename = "sequential.json"
-    sequential_data = read_data(json_filename, "unordered_numbers")
+    key_of_sequence = "dna_sequence"
+    sequential_data = read_data(json_filename, key_of_sequence)
     print(sequential_data)
     found_numbers_linear = linear_search(sequential_data, 0)
     print(found_numbers_linear)
-
+    pytel = pattern_search(sequential_data, "ATA")
+    print(pytel)
 
 
 if __name__ == '__main__':
