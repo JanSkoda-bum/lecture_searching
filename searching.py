@@ -41,7 +41,7 @@ def pattern_search(sequence, pattern):
             if sequence[idx + idx_pattern] == pattern_element:
                 pattern_similarity = pattern_similarity + 1
             else:
-                pass
+                break
 
         if pattern_similarity == pattern_length:
             set_of_idxs.add(idx + pattern_length // 2 - 1)
@@ -49,16 +49,34 @@ def pattern_search(sequence, pattern):
             pass
     return set_of_idxs
 
+def binary_search(sequence, number):
+    left = 0
+    right = len(sequence) - 1
+    while right >= left:
+        middle = (left + right) // 2
+        #print(sequence[middle])
+        if sequence[middle] == number:
+            return middle
+        elif sequence[middle] > number:
+            right = middle - 1
+        elif sequence[middle] < number:
+            left = middle + 1
+    return None
+
+
 
 def main():
     json_filename = "sequential.json"
-    key_of_sequence = "dna_sequence"
+    key_of_sequence = "ordered_numbers"
     sequential_data = read_data(json_filename, key_of_sequence)
+    hledane_cislo = 25
     print(sequential_data)
-    found_numbers_linear = linear_search(sequential_data, 0)
-    print(found_numbers_linear)
-    pytel = pattern_search(sequential_data, "ATA")
-    print(pytel)
+    #found_numbers_linear = linear_search(sequential_data, 0)
+    #print(found_numbers_linear)
+    #pytel = pattern_search(sequential_data, "ATA")
+    #print(pytel)
+    hledany_index = binary_search(sequential_data, hledane_cislo)
+    print(hledany_index)
 
 
 if __name__ == '__main__':
